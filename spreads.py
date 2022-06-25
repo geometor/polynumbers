@@ -15,11 +15,8 @@ limx, limy = (-0.1, 1.1), (-0.1, 1.1)
 
 for n in range(1, count + 1):
     p = Spread(n)
-    # p = chebyshevt(n, x)
-    # p = chebyshevu(n, x)
     p = p.as_poly()
 
-    #  display((sp.Indexed('T', n), p))
     if hasattr(p, 'expr'):
         polys.append(p)
         #  display(p.expr)
