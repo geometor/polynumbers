@@ -2,23 +2,15 @@ from polynumbers import *
 
 from IPython.display import display
 
+count = 5
+print('count:', count)
+
 NAME = 'polynumbers'
 NAME += input(f'\nsession folder: {NAME}')
-
-def Chebyshev(n):
-    n = sp.Integer(n)
-
-    p = sp.Poly((-((-1)**n+1)/2)**((n+4)/2))
-    for i in range(1, n+1):
-        i = sp.Integer(i)
-        p += sp.Poly(n*(((-1)**(n+i)+1)/2 * (-1)**((n-i)/2)) * 2**(i-1) * \
-                sp.factorial((n-2+i)//2)/(sp.factorial((n-i)//2) * sp.factorial(i)) * x**i)
-    return p
 
 results = []
 polys = []
 
-count = 20
 limx, limy = (-0.1, 1.1), (-0.1, 1.1)
 
 for n in range(1, count + 1):
@@ -46,8 +38,6 @@ ax.axis('off')
 ax_btm.axis('off')
 bounds = set_bounds(limx, limy)
 
-#  ax.xlim = limx
-#  ax.ylim = limy
 plt.tight_layout()
 ax_prep(ax, ax_btm, bounds, "spread polynomials")
 
@@ -91,52 +81,3 @@ for g in goldens:
 plot_points(ax, pts)
 snapshot(f'{NAME}', f'summary.png')
 plt.show()
-#  display(s1_pts)
-
-#  plots.show()
-
-    #  ax.clear()
-    #  ax_btm.clear()
-
-    #  ax.axis('off')
-    #  ax_btm.axis('off')
-    #  ax.set_aspect('equal')
-    #  plt.tight_layout()
-
-    #  title = f'G E O M E T O R • pappus • perm: {perm_id}'
-    #  fig.suptitle(title, fontdict={'color': '#960', 'size':'small'})
-
-    #  folder = f'{NAME}/{perm_id}'
-    #  print_log('\nPlot Sequence')
-    #  build_sequence(folder, ax, ax_btm, history, bounds)
-
-    #  print_log('\nPlot Harmonic Ranges')
-
-    #  print_log(f'\nPERM: {perm_id}')
-    #  print_log(f'    elements: {len(elements)}')
-    #  print_log(f'    points:   {len(pts)}')
-
-
-
-#  # ANALYZE ***************************
-#  print_log(f'\PLOT: ALL')
-
-#  ax.clear()
-#  title = f'G E O M E T O R • pappus • all'
-#  ax.set_title(title, fontdict={'color': '#960', 'size':'small'})
-#  ax.axis(False)
-
-#  folder = f'{NAME}/all'
-#  print_log('\nPlot Sequence')
-#  build_sequence(folder, ax, ax_btm, history, bounds)
-
-#  print_log('\nPlot Harmonic Ranges')
-#  #  folder += '/ranges'
-#  plot_ranges(folder, ax, ax_btm, history, harmonics, bounds)
-#  plot_all_ranges(folder, ax, ax_btm, history, harmonics, bounds)
-
-#  print_log(f'\nCOMPLETE: {NAME}')
-#  print_log(f'    elements: {len(elements)}')
-#  print_log(f'    points:   {len(pts)}')
-#  print_log(f'    ranges:  {len(harmonics)}')
-#  plt.show()
