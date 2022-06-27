@@ -2,7 +2,7 @@ from polynumbers import *
 
 from IPython.display import display
 
-count = 5
+count = 50
 print('count:', count)
 
 NAME = 'polynumbers'
