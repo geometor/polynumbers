@@ -15,7 +15,7 @@ def Spread(n):
         next_term = sp.Poly(((-4)**(k-1))/(n+k) * sp.binomial(n+k,2*k) * x**k)
         # print(next_poly)
         p += next_term
-        print(p)
+        #  print(p)
     return 2*n*p
 
 def Chebyshev(n):
