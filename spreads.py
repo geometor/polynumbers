@@ -2,7 +2,7 @@ from polynumbers import *
 
 from IPython.display import display
 
-count = 50
+count = 5
 print('count:', count)
 
 NAME = 'polynumbers'
@@ -15,7 +15,7 @@ limx, limy = (-0.1, 1.1), (-0.1, 1.1)
 
 for n in range(1, count + 1):
     p = Spread(n)
-    p = p.as_poly()
+    #  p = p.as_poly()
 
     if hasattr(p, 'expr'):
         polys.append(p)

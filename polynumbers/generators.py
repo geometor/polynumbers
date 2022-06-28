@@ -10,7 +10,12 @@ def Spread(n):
     p = sp.Integer(0)
     for k in range(1, n+1):
         k = sp.Integer(k)
-        p += sp.Poly(((-4)**(k-1))/(n+k) * sp.binomial(n+k,2*k) * x**k)
+        # print('---')
+        # print(k)
+        next_term = sp.Poly(((-4)**(k-1))/(n+k) * sp.binomial(n+k,2*k) * x**k)
+        # print(next_poly)
+        p += next_term
+        print(p)
     return 2*n*p
 
 def Chebyshev(n):
