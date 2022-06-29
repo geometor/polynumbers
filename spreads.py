@@ -7,9 +7,19 @@ from cycler import cycler
 
 #  plt.rcParams['axes.prop_cycle'] = cycler('color', mp.cm.get_cmap('gray').colors)
 
+count = 200
+# division across the unit
+divisions = 2**16
+span = sp.Rational(5, 4)
+k = sp.Rational(1, divisions)
 
-count = 10
+steps = span / k
+
 print('count:', count)
+print('division:', divisions)
+print('k:', k)
+print('span:', span)
+print('steps:', steps)
 
 NAME = 'polynumbers/spread'
 NAME += input(f'\nsession folder: {NAME}')
@@ -20,7 +30,8 @@ polys = []
 
 for n in range(1, count + 1):
     p = Spread(n)
-    #  p = p.as_poly()
+    
+    #  p = sp.chebyshevt_poly(n, x).as_poly()
 
     if hasattr(p, 'expr'):
         polys.append(p)
@@ -33,31 +44,21 @@ for n in range(1, count + 1):
     #  print('-----------------------')
 
 
-#  def SpreadPoly(n):
-    #  p = []
-    #  for k in range(1,n+1):
-        #  p += [Fraction(-n * comb(n+k,n-k) * (-4)**k, (2*(n+k)))]
-    #  return p[::-1]
 
-#  def PolyEval(p, x):
-    #  r = Fraction(0,1)
-    #  for k in range(len(p)):
-        #  i = p[k]
-        #  r = x * (i + r)
-    #  return r
-
-#  def getPoints(n, density):
-    #  p = SpreadPoly(n)
-    #  i = Fraction(1, density)
-    #  k = Fraction(-1,density)
-    #  x, y = [], []
-    #  for j in range(density+1):
-        #  k += i
-        #  x.append(k)
-        #  y.append(PolyEval(p, k))
-    #  return x, y
+#  xs = np.arange(limx[0], limx[1], .001)
+xs = []
+# starting point in the range
+xs.append(sp.Rational(-1, 8))
 
 
+# construct list of x rational values for plotting
+for _ in range(steps):
+    xs.append(xs[-1] + k)
+
+xsf = [float(x_val) for x_val in xs]
+
+
+#plot config
 limx, limy = (-0.1, 1.1), (-0.1, 1.1)
 
 fig, (ax, ax_btm) = plt.subplots(2, 1, gridspec_kw={'height_ratios': [10, 1]})
@@ -68,34 +69,6 @@ bounds = set_bounds(limx, limy)
 plt.tight_layout()
 ax_prep(ax, ax_btm, bounds, "spread polynomials")
 
-#  xs = np.arange(limx[0], limx[1], .001)
-xs = []
-# starting point in the range
-xs.append(sp.Rational(-1, 8))
-
-# division across the unit
-divisions = 2**12
-span = sp.Rational(5, 4)
-k = sp.Rational(1, divisions)
-
-steps = span / k
-
-print('division:', divisions)
-print('k:', k)
-print('span:', span)
-print('steps:', steps)
-
-for _ in range(steps):
-    #  xs.append(sp.simplify(xs[-1] + k))
-    xs.append(xs[-1] + k)
-
-print(xs)
-
-#  xsf = [float(sp.evalf(x_val)) for x_val in xs]
-xsf = [float(x_val) for x_val in xs]
-
-#  float(sp.evalf(x_val)) for x_val in xs]
-
 exprs = [p.expr for p in polys]
 for i, poly in enumerate(polys):
     expr = poly.expr
@@ -103,8 +76,9 @@ for i, poly in enumerate(polys):
     print(i)
     print(expr)
     
-    f = sp.lambdify(x, expr)
-    ys = [f(x_val) for x_val in xs]
+    #  f = sp.lambdify(x, expr)
+    #  ys = [f(x_val) for x_val in xs]
+    ys = [poly.eval(x_val) for x_val in xs]
     ysf = [float(y_val) for y_val in ys]
 
     ax.plot(xsf, ysf)
