@@ -2,7 +2,7 @@ from polynumbers import *
 
 from IPython.display import display
 
-count = 100
+count = 10
 print('count:', count)
 
 NAME = 'polynumbers/spread'
@@ -13,8 +13,9 @@ polys = []
 
 
 for n in range(1, count + 1):
-    p = Spread(n)
-    #  p = p.as_poly()
+    #  p = Spread(n)
+    
+    p = sp.chebyshevt_poly(n, x).as_poly()
 
     if hasattr(p, 'expr'):
         polys.append(p)
@@ -27,40 +28,15 @@ for n in range(1, count + 1):
     #  print('-----------------------')
 
 
-#  def SpreadPoly(n):
-    #  p = []
-    #  for k in range(1,n+1):
-        #  p += [Fraction(-n * comb(n+k,n-k) * (-4)**k, (2*(n+k)))]
-    #  return p[::-1]
-
 #  def PolyEval(p, x):
-    #  r = Fraction(0,1)
+    #  r = sp.Rational(0,1)
     #  for k in range(len(p)):
         #  i = p[k]
         #  r = x * (i + r)
     #  return r
 
-#  def getPoints(n, density):
-    #  p = SpreadPoly(n)
-    #  i = Fraction(1, density)
-    #  k = Fraction(-1,density)
-    #  x, y = [], []
-    #  for j in range(density+1):
-        #  k += i
-        #  x.append(k)
-        #  y.append(PolyEval(p, k))
-    #  return x, y
 
 
-limx, limy = (-0.1, 1.1), (-0.1, 1.1)
-
-fig, (ax, ax_btm) = plt.subplots(2, 1, gridspec_kw={'height_ratios': [10, 1]})
-ax.axis('off')
-ax_btm.axis('off')
-bounds = set_bounds(limx, limy)
-
-plt.tight_layout()
-ax_prep(ax, ax_btm, bounds, "spread polynomials")
 
 #  xs = np.arange(limx[0], limx[1], .001)
 xs = []
@@ -79,16 +55,23 @@ print('k:', k)
 print('span:', span)
 print('steps:', steps)
 
+# construct list of x rational values for plotting
 for _ in range(steps):
-    #  xs.append(sp.simplify(xs[-1] + k))
     xs.append(xs[-1] + k)
 
-print(xs)
-
-#  xsf = [float(sp.evalf(x_val)) for x_val in xs]
 xsf = [float(x_val) for x_val in xs]
 
-#  float(sp.evalf(x_val)) for x_val in xs]
+
+#plot config
+limx, limy = (-0.1, 1.1), (-0.1, 1.1)
+
+fig, (ax, ax_btm) = plt.subplots(2, 1, gridspec_kw={'height_ratios': [10, 1]})
+ax.axis('off')
+ax_btm.axis('off')
+bounds = set_bounds(limx, limy)
+
+plt.tight_layout()
+ax_prep(ax, ax_btm, bounds, "spread polynomials")
 
 exprs = [p.expr for p in polys]
 for i, poly in enumerate(polys):
@@ -97,8 +80,9 @@ for i, poly in enumerate(polys):
     print(i)
     print(expr)
     
-    f = sp.lambdify(x, expr)
-    ys = [f(x_val) for x_val in xs]
+    #  f = sp.lambdify(x, expr)
+    #  ys = [f(x_val) for x_val in xs]
+    ys = [poly.eval(x_val) for x_val in xs]
     ysf = [float(y_val) for y_val in ys]
 
     ax.plot(xsf, ysf)
