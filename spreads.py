@@ -1,8 +1,14 @@
 from polynumbers import *
 
 from IPython.display import display
+#  plt.rcParams['image.cmap'] = 'copper'
+#  plt.set_cmap('copper')
+from cycler import cycler
 
-count = 100
+#  plt.rcParams['axes.prop_cycle'] = cycler('color', mp.cm.get_cmap('gray').colors)
+
+
+count = 10
 print('count:', count)
 
 NAME = 'polynumbers/spread'
