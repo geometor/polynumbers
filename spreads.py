@@ -3,14 +3,14 @@ from polynumbers import *
 from IPython.display import display
 #  plt.rcParams['image.cmap'] = 'copper'
 #  plt.set_cmap('copper')
-from cycler import cycler
+#  from cycler import cycler
 
-#  plt.rcParams['axes.prop_cycle'] = cycler('color', mp.cm.get_cmap('gray').colors)
+plt.rcParams['axes.prop_cycle'] = mp.cycler(color=['#f906', '#90F6'])
 
-count = 200
+count = 100
 # division across the unit
-divisions = 2**16
-span = sp.Rational(5, 4)
+divisions = 2**14
+span = sp.Rational(9, 8)
 k = sp.Rational(1, divisions)
 
 steps = span / k
@@ -48,7 +48,7 @@ for n in range(1, count + 1):
 #  xs = np.arange(limx[0], limx[1], .001)
 xs = []
 # starting point in the range
-xs.append(sp.Rational(-1, 8))
+xs.append(sp.Rational(-1, 16))
 
 
 # construct list of x rational values for plotting
