@@ -5,9 +5,9 @@ from IPython.display import display
 #  plt.set_cmap('copper')
 #  from cycler import cycler
 
-plt.rcParams['axes.prop_cycle'] = mp.cycler(color=['#f906', '#90F6'])
+plt.rcParams['axes.prop_cycle'] = mp.cycler(color=['#F906', '#90F6', '#0F96'])
 
-count = 2**8
+count = 2**6
 # division across the unit
 divisions = 2**15
 span = sp.Rational(9, 8)
@@ -99,13 +99,21 @@ for i, poly in enumerate(polys):
             pt = point(root, f(root))
             print(pt)
             add_point(pt)
-    snapshot(f'{NAME}', f'{i:0>3}.png')
+    snapshot(f'{NAME}', f'{i:0>5}.png')
 #  plots.save('spread_polynomials.png')
 
 # zoom to origin
-left_zoom = np.arange(1, 1/256, -1/1024)
+#  left_zoom = np.arange(1, 1/256, -1/1024)
+num_steps = 2 ** 9
+steps = np.arange(num_steps)
+steps = np.sqrt(steps)
+steps = steps / steps.sum()
+steps = steps.cumsum()
+steps = reversed(steps)
 
-for i, xmax in enumerate(left_zoom):
+print(steps)
+
+for i, xmax in enumerate(steps):
     ax.set_xlim(0, xmax)
     snapshot(f'{NAME}/left_zoom', f'{i:0>5}.png')
 
