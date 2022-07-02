@@ -7,9 +7,9 @@ from IPython.display import display
 
 plt.rcParams['axes.prop_cycle'] = mp.cycler(color=['#f906', '#90F6'])
 
-count = 100
+count = 2**8
 # division across the unit
-divisions = 2**14
+divisions = 2**15
 span = sp.Rational(9, 8)
 k = sp.Rational(1, divisions)
 
@@ -59,7 +59,7 @@ xsf = [float(x_val) for x_val in xs]
 
 
 #plot config
-limx, limy = (-0.1, 1.1), (-0.1, 1.1)
+limx, limy = (-1/2**6, 1+1/2**6), (-1/2**6, 1+1/2**6)
 
 fig, (ax, ax_btm) = plt.subplots(2, 1, gridspec_kw={'height_ratios': [10, 1]})
 ax.axis('off')
@@ -101,6 +101,14 @@ for i, poly in enumerate(polys):
             add_point(pt)
     snapshot(f'{NAME}', f'{i:0>3}.png')
 #  plots.save('spread_polynomials.png')
+
+# zoom to origin
+left_zoom = np.arange(1, 1/256, -1/1024)
+
+for i, xmax in enumerate(left_zoom):
+    ax.set_xlim(0, xmax)
+    snapshot(f'{NAME}/left_zoom', f'{i:0>5}.png')
+
 
 goldens = analyze_golden_pts(pts)
 print('GOLDENS:', len(goldens))
