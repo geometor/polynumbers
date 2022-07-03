@@ -7,9 +7,9 @@ from IPython.display import display
 
 plt.rcParams['axes.prop_cycle'] = mp.cycler(color=['#F906', '#90F6', '#0F96'])
 
-count = 2**6
+count = 2**7
 # division across the unit
-divisions = 2**15
+divisions = 2**16
 span = sp.Rational(9, 8)
 k = sp.Rational(1, divisions)
 
@@ -104,7 +104,7 @@ for i, poly in enumerate(polys):
 
 # zoom to origin
 #  left_zoom = np.arange(1, 1/256, -1/1024)
-num_steps = 2 ** 9
+num_steps = 2 ** 10
 steps = np.arange(num_steps)
 steps = np.sqrt(steps)
 steps = steps / steps.sum()
@@ -114,8 +114,15 @@ steps = reversed(steps)
 print(steps)
 
 for i, xmax in enumerate(steps):
+
     ax.set_xlim(0, xmax)
     snapshot(f'{NAME}/left_zoom', f'{i:0>5}.png')
+
+for i, xmax in enumerate(steps):
+    xmax = xmax / 2
+    
+    ax.set_xlim(xmax, .5 + xmax)
+    snapshot(f'{NAME}/center', f'{i:0>5}.png')
 
 
 goldens = analyze_golden_pts(pts)
