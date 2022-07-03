@@ -9,16 +9,6 @@ plt.rcParams['axes.prop_cycle'] = mp.cycler(color=['#F906', '#90F6', '#0F96'])
 count = 2**4
 # division across the unit
 divisions = 2**12
-span = sp.Rational(9, 8)
-k = sp.Rational(1, divisions)
-
-steps = span / k
-
-print('count:', count)
-print('division:', divisions)
-print('k:', k)
-print('span:', span)
-print('steps:', steps)
 
 NAME = 'polynumbers/spread/point'
 NAME += input(f'\nsession folder: {NAME}')
@@ -26,7 +16,7 @@ NAME += input(f'\nsession folder: {NAME}')
 results = []
 polys = []
 
-def meets(p1, p2):
+def meet_points(p1, p2):
     meet_pts = []
     p_sub = p1 - p2
     f = sp.lambdify(x, p1.expr)
@@ -51,8 +41,57 @@ def meets(p1, p2):
     return meet_pts
 
 
+def root_points(p):
+    root_pts = []
+    f = sp.lambdify(x, p.expr)
+    for root in p.all_roots():
+        root_x = root.simplify()
+        if root_x.is_algebraic:
+            root_y = sp.simplify(f(root_x))
+            print(f'        x: {root_x}')
+            print(f'        y: {root_y}')
+            print()
+            pt = point(root_x, root_y)
+            #  print(pt)
+            pt = add_point(pt)
+            root_pts.append(pt)
+        else:
+            print(f'        x: {root_x}')
+            print(f'        NOT ALGEBRAIC')
+            print(f'        x: {float(root_x)}')
+            print(f'        y: {f(float(root_x))}')
+            print()
+    return root_pts
+
+
+def vertex_points(p):
+    vertex_pts = []
+    p_d = p.diff()
+    f = sp.lambdify(x, p.expr)
+    for root in p_d.all_roots():
+        root_x = root.simplify()
+        if root_x.is_algebraic:
+            root_y = sp.simplify(f(root_x))
+            print(f'        x: {root_x}')
+            print(f'        y: {root_y}')
+            print()
+            pt = point(root_x, root_y)
+            #  print(pt)
+            pt = add_point(pt)
+            vertex_pts.append(pt)
+        else:
+            print(f'        x: {root_x}')
+            print(f'        NOT ALGEBRAIC')
+            print(f'        x: {float(root_x)}')
+            print(f'        y: {f(float(root_x))}')
+            print()
+    return vertex_pts
+
+
 print('Generate:')
 for n in range(1, count + 1):
+    #  p = sp.hermite_poly(n, x).as_poly()
+    #  p = sp.jacobi_poly(n, x).as_poly()
     #  p = sp.chebyshevt_poly(n, x).as_poly()
     p = Spread(n)
     expr = p.expr
@@ -66,10 +105,13 @@ for n in range(1, count + 1):
         cfs.reverse()
         results.append(cfs)
 
+    root_points(p)
+    vertex_points(p)
+
     # find meets with previous curves
     for p_prev in polys[:-1]:
         print('    test: ', p_prev)
-        meets(p, p_prev)
+        meet_points(p, p_prev)
 
 #  goldens = analyze_golden_pts(pts)
 #  print('GOLDENS:', len(goldens))
@@ -77,10 +119,19 @@ for n in range(1, count + 1):
     #  print(g)
 
 if PLOT:
-    #  xs = np.arange(limx[0], limx[1], .001)
+    #  span = sp.Rational(9, 8)
+    #plot config
+    #  limx, limy = (-1/2**6, 1+1/2**6), (-1/2**6, 1+1/2**6)
+    limx, limy = get_limits_from_points(pts, margin=.0625)
+
+    span = limx[1] - limx[0]
+    k = sp.Rational(1, divisions)
+    steps = int(span / k)
+    
     xs = []
     # starting point in the range
-    xs.append(sp.Rational(-1, 16))
+    #  xs.append(sp.Rational(-1, 16))
+    xs.append(limx[0])
 
     # construct list of x rational values for plotting
     for _ in range(steps):
@@ -88,8 +139,6 @@ if PLOT:
 
     xsf = [float(x_val) for x_val in xs]
 
-    #plot config
-    limx, limy = (-1/2**6, 1+1/2**6), (-1/2**6, 1+1/2**6)
 
     fig, (ax, ax_btm) = plt.subplots(2, 1, gridspec_kw={'height_ratios': [10, 1]})
     ax.axis('off')
@@ -127,4 +176,13 @@ if PLOT:
     ax.set_xlim(limx[0], limx[1])
     plot_points(ax, pts)
     snapshot(f'{NAME}', f'summary.png')
+
+    print('count:', count)
+    print('division:', divisions)
+    print('k:', k)
+    print('span:', span)
+    print('steps:', steps)
+
+    print('points: ', len(pts))
+
     plt.show()
