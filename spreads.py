@@ -1,5 +1,4 @@
 from polynumbers import *
-from IPython.display import display
 
 PLOT = True
 POINTS = True
@@ -8,12 +7,14 @@ ZOOM = False
 #  plt.rcParams['axes.prop_cycle'] = mp.cycler(color=['#F906', '#90F6', '#0F96'])
 plt.rcParams['axes.prop_cycle'] = mp.cycler(color=['#F906', '#90F6'])
 
-count = 2**4
+count = 2**3
 # division across the unit
 divisions = 2**12
 
 NAME = 'polynumbers/spread/point'
 NAME += input(f'\nsession folder: {NAME}')
+log_init(NAME)
+start_time = timer()
 
 results = []
 polys = []
@@ -60,8 +61,8 @@ if PLOT:
     limx, limy = get_limits_from_points(pts, margin=.0625)
 
     span = limx[1] - limx[0]
-    k = sp.Rational(1, divisions)
-    steps = int(span / k)
+    h = sp.Rational(1, divisions)
+    steps = int(span / h)
     
     xs = []
     # starting point in the range
@@ -70,7 +71,7 @@ if PLOT:
 
     # construct list of x rational values for plotting
     for _ in range(steps):
-        xs.append(xs[-1] + k)
+        xs.append(xs[-1] + h)
 
     xsf = [float(x_val) for x_val in xs]
 
@@ -113,20 +114,10 @@ if PLOT:
     snapshot(f'{NAME}', f'summary.png')
 
 
-    five = []
-    five.append(pts[0])
-    five.append(pts[9])
-    five.append(pts[3])
-    five.append(pts[8])
-    five.append(point(0, 1))
-    
-    conic = find_conic_from_pts(five)
-    print('conic: ', conic)
 
-
-    print('count:', count)
-    print('division:', divisions)
-    print('k:', k)
+    print('number of curves:', count)
+    print('resolution:', divisions)
+    print('h:', h)
     print('span:', span)
     print('steps:', steps)
 
