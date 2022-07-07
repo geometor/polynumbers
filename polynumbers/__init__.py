@@ -88,23 +88,15 @@ def find_conic_from_pts(five_pts):
 
     # We assume the equation to be A*x**2+B*y**2+C*x*y+D*x+E*y+1=0
 
-    d = sp.Matrix()
+    d = sp.Matrix([[x**2,x*y,y**2,x,y,1]])
 
     for i, pt in enumerate(five_pts):
-        p_x, p_y = pt.x,  pt.y
-        d = d.row_insert(i, sp.Matrix([[p_x**2, p_y**2, p_x * p_y, p_x, p_y]]))
-
-    d_det = d.det()
-    coeff = []
-    #  breakpoint()
-    for i in range(len(five_pts)):
-        d_coeff = d.copy()
-        d_coeff.col_del(i)
-        d_coeff = d_coeff.col_insert(i, sp.Matrix([-1, -1, -1, -1, -1]))
-        coeff.append(d_coeff.det() / d_det)
-
-    expr =  coeff[0] * x**2 + coeff[1] * y**2 + coeff[2] * x * y + coeff[3] * x + coeff[4] * y + 1
+        p_x, p_y = pt[0], pt[1]
+        d = d.row_insert(i+1, sp.Matrix([[p_x**2, p_x * p_y, p_y**2, p_x, p_y,1]]))
+    
+    expr = sp.Eq(d.det(),0)
+    
     print(expr)
-    #  breakpoint()
+
     return expr
-    #  return sp.Eq(coeff[0] * x**2 + coeff[1] * y**2 + coeff[2] * x * y + coeff[3] * x + coeff[4] * y + 1, 0)
+    
