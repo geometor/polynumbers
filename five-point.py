@@ -8,7 +8,7 @@ ZOOM = False
 #  plt.rcParams['axes.prop_cycle'] = mp.cycler(color=['#F906', '#90F6', '#0F96'])
 plt.rcParams['axes.prop_cycle'] = mp.cycler(color=['#F906', '#90F6'])
 
-count = 2**4
+count = 2**3
 # division across the unit
 divisions = 2**12
 

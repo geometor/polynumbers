@@ -94,7 +94,8 @@ def find_conic_from_pts(five_pts):
         p_x, p_y = pt[0], pt[1]
         d = d.row_insert(i+1, sp.Matrix([[p_x**2, p_x * p_y, p_y**2, p_x, p_y,1]]))
     
-    expr = sp.Eq(d.det(),0)
+    #  expr = sp.Eq(d.det(),0)
+    expr = sp.simplify(d.det())
     
     print(expr)
 
