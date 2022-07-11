@@ -15,7 +15,6 @@ def golden_polys(n):
     return polys
         
 
-
 def Spread(n):
     n = sp.Integer(n)
     p = sp.Integer(0)
@@ -28,6 +27,16 @@ def Spread(n):
         p += next_term
         #  print(p)
     return 2*n*p
+
+
+def spread_polys(count):
+    polys = []
+    for n in range(1, count + 1):
+        p = Spread(n)
+        polys.append(p)
+
+    return polys
+
 
 def Chebyshev(n):
     n = sp.Integer(n)

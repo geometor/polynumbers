@@ -1,6 +1,7 @@
 from polynumbers import *
 
 PLOT = True
+ANALYZE = True
 POINTS = True
 ZOOM = False
 DIVISOR = 2**12
@@ -10,17 +11,18 @@ colors = ['#F906', '#90F6']
 
 def main():
 
-    count = 2**2
+    count = 2**3
 
-    NAME = 'polynumbers/goldens'
-    NAME += input(f'\nsession folder: {NAME}')
-    log_init(NAME)
+    folder = 'polynumbers/goldens'
+    folder += input(f'\nsession folder: {folder}')
+    log_init(folder)
     start_time = timer()
 
     results = []
 
     print('Generate:')
     polys = golden_polys(count)
+    #  polys = spread_polys(count)
 
     for n, p in enumerate(polys):
         expr = p.expr
@@ -49,10 +51,15 @@ def main():
             print('    meet: ', p_prev)
             meet_points(p, p_prev)
 
-    #  goldens = analyze_golden_pts(pts)
-    #  print('GOLDENS:', len(goldens))
-    #  for g in goldens:
-        #  print(g)
+    if ANALYZE:
+        x_points = []
+        for pt in pts:
+            x_points.append(point(pt.x, 0))
+
+        golden_sections = analyze_golden_pts(x_points)
+        print('GOLDENS:', len(golden_sections))
+        for g in golden_sections:
+            print(g)
 
     if PLOT:
         print('PLOT')
@@ -70,14 +77,14 @@ def main():
         plot_points(ax, [A, B])
         plot_line(ax, baseline, bounds)
         
-        plot_polys(NAME, ax, polys, limx, limy, DIVISOR)
+        plot_polys(folder, ax, polys, limx, limy, DIVISOR)
 
         print('number of curves:', len(polys))
         print('resolution:', DIVISOR)
 
         print('points: ', len(pts))
         plot_points(ax, pts)
-        snapshot(f'{folder}', f'summary.png')
+        snapshot(folder, f'summary.png')
 
         plt.show()
 
