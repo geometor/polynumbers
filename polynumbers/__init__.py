@@ -9,14 +9,19 @@ def meet_points(p1, p2):
     p_sub = p1 - p2
     f = sp.lambdify(x, p1.expr)
     print('        sub: ', p_sub)
-    for root in p_sub.real_roots():
+    roots = p_sub.real_roots()
+    roots = {root:roots.count(root) for root in roots}
+    #  for root in p_sub.real_roots():
+    for root in roots:
         root_x = root.simplify()
+        count = roots[root]
+        print(f'    count: {count}')
         if root_x.is_algebraic:
             root_y = sp.simplify(f(root_x))
             print(f'        x: {root_x}')
             print(f'        y: {root_y}')
             print()
-            pt = point(root_x, root_y)
+            pt = point(root_x, root_y, classes=['meet'])
             #  print(pt)
             pt = add_point(pt)
             meet_pts.append(pt)
@@ -32,14 +37,19 @@ def meet_points(p1, p2):
 def root_points(p):
     root_pts = []
     f = sp.lambdify(x, p.expr)
-    for root in p.all_roots():
+    roots = p.real_roots()
+    roots = {root:roots.count(root) for root in roots}
+    #  for root in p.real_roots():
+    for root in roots:
         root_x = root.simplify()
+        count = roots[root]
+        print(f'    count: {count}')
         if root_x.is_algebraic:
             root_y = sp.simplify(f(root_x))
             print(f'        x: {root_x}')
             print(f'        y: {root_y}')
             print()
-            pt = point(root_x, root_y)
+            pt = point(root_x, root_y, classes=['root'])
             #  print(pt)
             pt = add_point(pt)
             root_pts.append(pt)
@@ -56,14 +66,19 @@ def vertex_points(p):
     vertex_pts = []
     p_d = p.diff()
     f = sp.lambdify(x, p.expr)
-    for root in p_d.all_roots():
+    roots = p_d.real_roots()
+    roots = {root:roots.count(root) for root in roots}
+    #  for root in p_d.real_roots():
+    for root in roots:
         root_x = root.simplify()
+        count = roots[root]
+        print(f'    count: {count}')
         if root_x.is_algebraic:
             root_y = sp.simplify(f(root_x))
             print(f'        x: {root_x}')
             print(f'        y: {root_y}')
             print()
-            pt = point(root_x, root_y)
+            pt = point(root_x, root_y, classes=['vertex'])
             #  print(pt)
             pt = add_point(pt)
             vertex_pts.append(pt)

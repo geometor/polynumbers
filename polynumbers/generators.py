@@ -5,6 +5,17 @@ from geometor.utils import *
 from geometor.model import *
 from geometor.render import *
 
+def golden_polys(n):
+    start = sp.Poly([1, -1, -1], x)
+    polys = []
+    polys.append(start)
+    for i in range(1, n+1):
+        polys.append(start * x**i)
+    
+    return polys
+        
+
+
 def Spread(n):
     n = sp.Integer(n)
     p = sp.Integer(0)
