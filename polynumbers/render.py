@@ -3,45 +3,6 @@ import matplotlib.pyplot as plt
 import sympy as sp
 from geometor.render import *
 
-def ax_set_bounds(ax, bounds):
-    vmin = bounds.vertices[0]
-    vmax = bounds.vertices[2]
-    ax.set_xlim(float(vmin.x.evalf()), float(vmax.x.evalf()))
-    ax.set_ylim(float(vmin.y.evalf()), float(vmax.y.evalf()))
-
-def ax_set_spines(ax):
-    ax.spines['bottom'].set_color('k')
-    ax.spines['top'].set_color('k')
-    ax.spines['right'].set_color('k')
-    ax.spines['left'].set_color('k')
-    ax.tick_params(axis='x', colors='k')
-    ax.tick_params(axis='y', colors='k')
-    
-def ax_prep_caption(bounds, xlabel):
-    plt.rcParams['figure.figsize'] = [16, 9]
-    #  plt.tight_layout()
-    fig, (ax, ax_btm) = plt.subplots(2, 1, gridspec_kw={'height_ratios': [10, 1]})
-    ax.clear()
-    ax_btm.clear()
-    ax.axis(False)
-    ax_btm.axis(False)
-    ax_set_bounds(ax, bounds)
-    ax.invert_yaxis()
-
-    ax_btm.text(0.5, 0.5, xlabel, ha='center', va='center', fontdict={'color': 'w', 'size':'20'})
-
-    return fig, ax, ax_btm
-
-def ax_prep_full(bounds):
-    plt.rcParams['figure.figsize'] = [16, 9]
-    plt.tight_layout()
-    fig, ax = plt.subplots(1, 1)
-    ax.clear()
-    ax.axis(False)
-    ax_set_bounds(ax, bounds)
-    ax.invert_yaxis()
-    return fig, ax
-
 def get_xs_values(limx, divisor):
     span = limx[1] - limx[0]
     h = sp.Rational(1, divisor)
