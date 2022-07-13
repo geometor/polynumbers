@@ -1,7 +1,7 @@
 from polynumbers import *
 
 PLOT = True
-ANALYZE = True
+ANALYZE = False
 POINTS = True
 ZOOM = False
 DIVISOR = 2**12
@@ -52,14 +52,27 @@ def main():
             meet_points(p, p_prev)
 
     if ANALYZE:
-        x_points = []
+        print('GOLDENS:')
+        x_points = set()
         for pt in pts:
-            x_points.append(point(pt.x, 0))
+            x_points.add(point(pt.x, 0))
+        x_points = sort_points(x_points)
 
         golden_sections = analyze_golden_pts(x_points)
-        print('GOLDENS:', len(golden_sections))
+        print('x series:', len(golden_sections))
         for g in golden_sections:
             print(g)
+        
+        y_points = set()
+        for pt in pts:
+            y_points.add(point(0, pt.y))
+        y_points = sort_points(y_points)
+
+        golden_sections = analyze_golden_pts(y_points)
+        print('y series:', len(golden_sections))
+        for g in golden_sections:
+            print(g)
+        
 
     if PLOT:
         print('PLOT')
