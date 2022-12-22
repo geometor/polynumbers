@@ -1,6 +1,7 @@
 
 
 .. figure:: spread_detail.png    
+   :width: 600px
    :alt: spread_detail
 
    detail of 256 spread polynomials in two color
