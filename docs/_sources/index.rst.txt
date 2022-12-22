@@ -4,7 +4,6 @@ GEOMETOR • polynumbers
 
 .. include:: README.rst
 
-.. image:: _static/all-zoom.png
 
 
 recent logs:
