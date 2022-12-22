@@ -1,0 +1,8 @@
+Welcome to the Polynumbers project
+==================================
+
+.. post::  22.356-152519
+   :tags: 
+   :category: STATUS
+
+first log entry for the system
