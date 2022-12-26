@@ -1,3 +1,4 @@
+import graphviz
 from rich import print
 
 a = [ [ [], [], [ [] ] ] ]
@@ -10,3 +11,8 @@ print(b)
 a.extend(b)
 
 print(a)
+
+dot = graphviz.Digraph('tree', format='png')
+dot.edge('A', 'B')
+dot.render('test.png')
+dot.view()
