@@ -1,0 +1,26 @@
+digraph tree {
+	graph [bgcolor=black]
+	node [fontcolor=white]
+	node [color=white]
+	node [shape=rect]
+	edge [color=green]
+	0 [label="[[[], [], [[]]], [], [], [], []]"]
+	0.0 [label="[[], [], [[]]]"]
+	0 -> 0.0
+	"0.0.0" [label="[]"]
+	0.0 -> "0.0.0"
+	"0.0.1" [label="[]"]
+	0.0 -> "0.0.1"
+	"0.0.2" [label="[[]]"]
+	0.0 -> "0.0.2"
+	"0.0.2.0" [label="[]"]
+	"0.0.2" -> "0.0.2.0"
+	0.1 [label="[]"]
+	0 -> 0.1
+	0.2 [label="[]"]
+	0 -> 0.2
+	0.3 [label="[]"]
+	0 -> 0.3
+	0.4 [label="[]"]
+	0 -> 0.4
+}
