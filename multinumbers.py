@@ -30,6 +30,7 @@ def graph_children(graph: graphviz.Digraph, parent_name: str, nodes: list):
 
 
 dot = graphviz.Digraph('multinumber', format='png')
+dot.engine = 'sfdp'
 dot.attr('graph', bgcolor='black')
 dot.attr('node', fontcolor='white')
 dot.attr('node', color='white')
