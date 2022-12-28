@@ -1,23 +1,22 @@
+"""
+Multinumber structure development and analysis
+"""
 import graphviz
 from rich import print
 
-a = [ [ [], [], [ [] ] ] ]
-
-print(a)
+a = [ [ [], [], [ [] ], [] ] ]
 
 b = [[] for _ in range(4)]
-print(b)
 
-nodes = a + b
+nodes = a + b + [[[]]]
 
-print(nodes)
 
 def graph_children(graph: graphviz.Digraph, parent_name: str, nodes: list):
     """connect parent node to list of child nodes
 
     :parent_name: str
     :nodes: list
-    :returns: TODO
+    :returns: None
 
     """
 
@@ -29,22 +28,42 @@ def graph_children(graph: graphviz.Digraph, parent_name: str, nodes: list):
             graph_children(graph, child_name, node)
 
 
-dot = graphviz.Digraph('multinumber', format='png')
-dot.engine = 'sfdp'
-dot.attr('graph', bgcolor='black')
-dot.attr('node', fontcolor='white')
-dot.attr('node', color='white')
-#  dot.attr('node', shape='point')
-dot.attr('node', shape='rest')
-dot.attr('edge', color='#666666')
-dot.attr('edge', arrowsize='1')
+def get_digraph(name: str) -> graphviz.Digraph:
+    """return a configured digraph
 
-parent = '0'
+    :name: TODO
+    :returns: TODO
 
-dot.node(parent, label=repr(nodes),)
-graph_children(dot, parent, nodes)
+    """
+    dot = graphviz.Digraph(name, format='png')
+    #  dot.engine = 'sfdp'
+    dot.attr('graph', bgcolor='black')
+    dot.attr('node', fontcolor='white')
+    dot.attr('node', color='white')
+    #  dot.attr('node', shape='point')
+    dot.attr('node', shape='rect')
+    dot.attr('edge', color='#666666')
+    dot.attr('edge', arrowsize='1')
+    return dot
 
-#  dot.view()
-print(dot.source)
 
-dot.render(view=True)
+def main():
+    """TODO: Docstring for main.
+
+    :returns: TODO
+
+    """
+    dot = get_digraph('multinumber')
+
+    parent = '0'
+    dot.node(parent, label=repr(nodes),)
+    graph_children(dot, parent, nodes)
+
+    print(dot.source)
+
+    dot.render(view=True)
+
+
+
+if __name__ == "__main__":
+    main()

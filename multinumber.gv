@@ -2,11 +2,11 @@ digraph multinumber {
 	graph [bgcolor=black]
 	node [fontcolor=white]
 	node [color=white]
-	node [shape=rest]
+	node [shape=rect]
 	edge [color="#666666"]
 	edge [arrowsize=1]
-	0 [label="[[[], [], [[]]], [], [], [], []]"]
-	0.0 [label="[[], [], [[]]]"]
+	0 [label="[[[], [], [[]], []], [], [], [], [], [[]]]"]
+	0.0 [label="[[], [], [[]], []]"]
 	0 -> 0.0
 	"0.0.0" [label="[]"]
 	0.0 -> "0.0.0"
@@ -16,6 +16,8 @@ digraph multinumber {
 	0.0 -> "0.0.2"
 	"0.0.2.0" [label="[]"]
 	"0.0.2" -> "0.0.2.0"
+	"0.0.3" [label="[]"]
+	0.0 -> "0.0.3"
 	0.1 [label="[]"]
 	0 -> 0.1
 	0.2 [label="[]"]
@@ -24,4 +26,8 @@ digraph multinumber {
 	0 -> 0.3
 	0.4 [label="[]"]
 	0 -> 0.4
+	0.5 [label="[[]]"]
+	0 -> 0.5
+	"0.5.0" [label="[]"]
+	0.5 -> "0.5.0"
 }
