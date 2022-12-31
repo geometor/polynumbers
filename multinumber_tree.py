@@ -22,12 +22,12 @@ class TreeApp(App):
         yield Tree("Root")
 
     @classmethod
-    def add_json(cls, node: TreeNode, json_data: object) -> None:
+    def add_mset(cls, node: TreeNode, mset: object) -> None:
         """Adds JSON data to a node.
 
         Args:
             node (TreeNode): A Tree node.
-            json_data (object): An object decoded from JSON.
+            mset (object): An object decoded from JSON.
         """
 
         from rich.highlighter import ReprHighlighter
@@ -46,12 +46,12 @@ class TreeApp(App):
                 node._label = Text(f"{{}} {name}")
                 for key, value in data.items():
                     new_node = node.add("")
-                    add_node(key, new_node, value)
+                    add_node(repr(value), new_node, value)
             elif isinstance(data, list):
-                node._label = Text(f"[] {name}")
+                node._label = Text(f"{name}")
                 for index, value in enumerate(data):
                     new_node = node.add("")
-                    add_node(str(index), new_node, value)
+                    add_node(repr(value), new_node, value)
             else:
                 node._allow_expand = False
                 if name:
@@ -62,20 +62,24 @@ class TreeApp(App):
                     label = Text(repr(data))
                 node._label = label
 
-        add_node("JSON", node, json_data)
+        add_node(repr(mset), node, mset)
 
     def on_mount(self) -> None:
         """Load some JSON when the app starts."""
         #  file_path = Path(__file__).parent / "food.json"
         #  with open(file_path) as data_file:
             #  self.json_data = json.load(data_file)
-        self.json_data = mset1
+        self.mset = mset1
+        tree = self.query_one(Tree)
+        mset_node = tree.root.add(repr(self.mset))
+        self.add_mset(mset_node, self.mset)
+        tree.root.expand()
 
     def action_add(self) -> None:
         """Add a node to the tree."""
         tree = self.query_one(Tree)
-        json_node = tree.root.add("JSON")
-        self.add_json(json_node, self.json_data)
+        mset_node = tree.root.add(repr(self.mset))
+        self.add_mset(mset_node, self.mset)
         tree.root.expand()
 
     def action_clear(self) -> None:
