@@ -21,10 +21,14 @@ urgent todos:
    :tags: urgent
    :excerpts:
 
-.. toctree::
-   :hidden:
-   :maxdepth: 3
 
+contents
+--------
+
+.. toctree::
+   :maxdepth: 1
+
+   refs/index.rst
 
 
 
