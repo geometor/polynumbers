@@ -6,7 +6,7 @@ author:
 ---
 
 # DOT Language | Graphviz
-source: [](https://graphviz.org/doc/info/lang.html)
+source: [https://graphviz.org/doc/info/lang.html](https://graphviz.org/doc/info/lang.html)
 
 > Abstract grammar for defining Graphviz nodes, edges, graphs, [subgraphs, and clusters](/doc/info/lang.html#subgraphs-and-clusters).
 
