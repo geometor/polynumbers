@@ -30,6 +30,11 @@ contents
 
    refs/index.rst
 
+   MISSION <mission/index.rst>
+   PROJECTS <projects/index.rst>
+   LOG </log#http://>
+   REFERENCES <refs/index.rst>
+   ABOUT <about.rst>
 
 
 .. Indices and tables
