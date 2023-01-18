@@ -28,8 +28,11 @@ contents
 .. toctree::
    :maxdepth: 1
 
-   refs/index.rst
-
+   MISSION <mission/index.rst>
+   MODULES <modules/index.rst>
+   LOG </log#http://>
+   REFERENCES <refs/index.rst>
+   ABOUT <about.rst>
 
 
 .. Indices and tables
