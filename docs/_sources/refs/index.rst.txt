@@ -1,8 +1,0 @@
-references
-==========
-
-.. toctree::
-   :glob:
-
-   *
-
