@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
   <id>https://geometor.github.io/polynumbers</id>
   <title>GEOMETOR • polynumbers</title>
-  <updated>2023-11-13T18:08:56.119206+00:00</updated>
+  <updated>2025-10-06T00:53:54.219154+00:00</updated>
   <link href="https://geometor.github.io/polynumbers"/>
   <link href="https://geometor.github.io/polynumbers/log/atom.xml" rel="self"/>
   <generator uri="https://ablog.readthedocs.org/" version="unknown.dev">ABlog</generator>
@@ -14,7 +14,7 @@
 &lt;p&gt;first log entry for the system&lt;/p&gt;
 &lt;/div&gt;
 </content>
-    <link href="https://geometor.github.io/polynumbers/log/22.356-152519/" rel="alternate"/>
+    <link href="https://geometor.github.io/polynumbers/log/22.356-152519/"/>
     <summary>first log entry for the system</summary>
     <published>2022-12-22T15:25:19+00:00</published>
   </entry>

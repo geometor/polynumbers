@@ -1,10 +1,7 @@
 GEOMETOR • polynumbers
 ======================
 
-
-.. include:: README.rst
-
-
+.. include:: intro.rst
 
 recent logs:
 ------------
@@ -12,32 +9,26 @@ recent logs:
 .. postlist:: 5
    :excerpts:
 
-
-urgent todos:
--------------
-
-.. postlist:: 
-   :category: TODO
-   :tags: urgent
-   :excerpts:
-
-
 contents
 --------
 
 .. toctree::
-   :maxdepth: 1
+   :hidden:
+   :maxdepth: 2
 
-   MISSION <mission/index.rst>
-   MODULES <modules/index.rst>
-   LOG </log#http://>
-   REFERENCES <refs/index.rst>
-   ABOUT <about.rst>
+   mission/index.rst
+   usage/index.rst
+   modules/index.rst
+   demos/index.rst
+   refs/index.rst
+   log </log#https://>
+   todos.rst
+   changelog.rst
+   glossary.rst
 
+indices
+-------
 
-.. Indices and tables
-.. ==================
-
-.. * :ref:`genindex`
-.. * :ref:`modindex`
-.. * :ref:`search`
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
